@@ -1,0 +1,11 @@
+{
+	"name": "ExtraBotWorld",
+	"version": "1.0.0",
+	"description": "Hewwo owo",
+	"main": "bot.js",
+	"author": "Drew",
+	"dependencies": {
+		"discord.io": "^2.5.3",
+		"winston": "^3.0.0"
+	}
+}

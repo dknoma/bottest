@@ -30,7 +30,7 @@ bot.on('message', (user, userID, channelID, message, evt) => {
                     to: channelID,
                     message: 'owo Hewwo owo'
                 });
+                break;
         }
     }
-
 });

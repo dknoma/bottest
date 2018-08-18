@@ -1,4 +1,6 @@
 # EMW Discord Bot
+> This is a Discord bot used in a personal server to hel
+
 
 ## Various Files
 

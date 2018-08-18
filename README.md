@@ -8,7 +8,7 @@
 - The paths to files required by Sequelize.
 
 ## Installation
-###All dependencies:
+### All dependencies:
 ```js
 "body-parser": "^1.18.3",
 "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",

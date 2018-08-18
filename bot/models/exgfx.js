@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var ExGFX = sequelize.define('ExGFX', {
+  const ExGFX = sequelize.define('ExGFX', {
     number: {
       type: DataTypes.STRING,
       allowNull: false
@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     finished: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      defaultValue: false
     }
   }, {});
-  ExGFX.associate = function(models) {
+  ExGFX.associate = (models) => {
     // associations can be defined here
   };
   return ExGFX;

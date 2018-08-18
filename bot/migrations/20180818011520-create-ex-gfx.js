@@ -32,7 +32,5 @@ module.exports = {
       type: Sequelize.DATE
     }
   }),
-  down: (queryInterface/*, Sequelize*/) => {
-    return queryInterface.dropTable('ExGFXes');
-  }
+  down: (queryInterface/*, Sequelize*/) => queryInterface.dropTable('ExGFXes'),
 };

@@ -8,12 +8,12 @@
  * 	!updateexgfxdesc  <# in hex>  <description>
  * 	!updateexgfxstatus  <# in hex>  <boolean>
  *  !getexgfx  <# in hex>: gets a specific ExGFX file from database
- * @param bot 
  */
-
 const ExGFX = require('../models').ExGFX;
+console.log("ExGFX: " + ExGFX);
+// const exgfxController = require('../controllers').exgfxes;
 
-module.exports = (bot) => {
+module.exports = (app, bot) => {
 	bot.on('message', (user, userID, channelID, message, evt) => {
 		// Our bot needs to know if it will execute a command
 		// It will listen for messages that will start with `!`

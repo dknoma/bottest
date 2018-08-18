@@ -1,6 +1,8 @@
+const express = require('express');
 const Discord = require('discord.io');
 const logger = require('winston');
 const auth = require('./auth.json');
+const app = express();
 
 require('dotenv').config()
 
@@ -20,6 +22,6 @@ bot.on('ready', evt => {
     logger.info(bot.username + '-(' + bot.id + ')');
 });
 
-require('./bot/routes/exgfxRoutes')(bot);
+require('./bot/routes/exgfxRoutes')(app, bot);
 
 module.exports = bot;

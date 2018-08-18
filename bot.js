@@ -2,6 +2,8 @@ const Discord = require('discord.io');
 const logger = require('winston');
 const auth = require('./auth.json');
 
+require('dotenv').config()
+
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, { colorize: true });
 logger.level = 'debug';

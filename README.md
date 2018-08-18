@@ -1,5 +1,10 @@
 # EMW Discord Bot
 
+## Various Files
+
+### .sequelizerc
+- The paths to files required by Sequelize.
+
 ## Installation
 ###All dependencies:
 ```js

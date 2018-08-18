@@ -54,7 +54,7 @@ module.exports = (app, bot) => {
 								bot.sendMessage({
 									to: channelID,
 									message: 'ExGFX' + args[0] 
-										+ ' has already been added to the database.'
+										+ ' has already been added to the database. Please try a different file.'
 								});
 							} else if(exgfx == null) {
 								bot.sendMessage({

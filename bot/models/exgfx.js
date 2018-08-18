@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     finished: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    img_link: {
+      type: DataTypes.STRING,
     }
   }, {});
   ExGFX.associate = (models) => {

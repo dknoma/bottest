@@ -4,16 +4,14 @@
  * 
  * Commands:
  *  !exgfx: lists all  ExGFX files
- *  !addexgfx  <# in hex>  <description>  <type>: adds a specific ExGFX file to database
+ *  !addexgfx  <# in hex>  <description>  <type>  <img_link>: adds a specific ExGFX file to database
  * 	!updateexgfxdesc  <# in hex>  <description>
  * 	!updateexgfxstatus  <# in hex>  <boolean>
  *  !getexgfx  <# in hex>: gets a specific ExGFX file from database
  */
 const ExGFX = require('../models').ExGFX;
-console.log("ExGFX: " + ExGFX);
-// const exgfxController = require('../controllers').exgfxes;
 
-module.exports = (app, bot) => {
+module.exports = (bot) => {
 	bot.on('message', (user, userID, channelID, message, evt) => {
 		// Our bot needs to know if it will execute a command
 		// It will listen for messages that will start with `!`
@@ -32,10 +30,10 @@ module.exports = (app, bot) => {
 					break;
 				//add exgfx command
 				case 'addexgfx':
-					console.log("args[0]: " + args[0]);
-					console.log("args[1]: " + args[1]);
-					console.log("args[2]: " + args[2]);
-					console.log(parseInt(args[0], 16));
+					// console.log("args[0]: " + args[0]);
+					// console.log("args[1]: " + args[1]);
+					// console.log("args[2]: " + args[2]);
+					// console.log(parseInt(args[0], 16));
 
 					if(parseInt(args[0], 16)) {
 						ExGFX.findOrCreate({
@@ -45,7 +43,8 @@ module.exports = (app, bot) => {
 							defaults: {
 								number: args[0],
 								description: args[1],
-								biome_type: args[2]
+								biome_type: args[2],
+								img_link: args[3]
 							}
 						})
 						.spread((exgfx, created) => {
@@ -82,10 +81,9 @@ module.exports = (app, bot) => {
 						});
 					}
 					break;
-				//update exgfx description command
-				case 'updateexgfxdesc':
-					console.log("args[0]: " + args[0]);
-					console.log("args[1]: " + args[1]);
+				
+				//list a specific exgfx command
+				case 'getexgfx':
 					ExGFX
 					.find({
 						where: {
@@ -93,14 +91,49 @@ module.exports = (app, bot) => {
 						}
 					})
 					.then(exgfx => {
+						bot.sendMessage({
+							to: channelID,
+							message: 'ExGFX' + exgfx.number + '\nFinished: ' + exgfx.finished 
+								+ '\nDescription: ' + exgfx.description
+								+ '\nBiome_type: ' + exgfx.biome_type
+								+ '\nImage_Link: ' + exgfx.img_link
+						});
+					})
+					.catch(error => {
+						bot.sendMessage({
+							to: channelID,
+							message: 'An error has occured. Command format: !exgfx'
+						});
+					});     
+					break;
+				//update exgfx description command
+				case 'updateexgfxdesc':
+					console.log("args[0]: " + args[0]);
+					console.log("args[1]: " + args[1]);
+					var newDesc = args[1];
+					ExGFX
+					.find({
+						where: {
+							number: args[0]
+						}
+					})
+					.then(exgfx => {
+						// console.log(exgfx.description);
 						exgfx.update({
-							description: arg[1]
-						}).then(exgfx => {
+							description: newDesc || exgfx.description
+						})
+						.then(() => {
 							bot.sendMessage({
 								to: channelID,
-								message: 'ExGFX' + args[0] + ' description updated to ' + arg[1] + '.'
+								message: 'ExGFX' + args[0] + ' description updated to ' + newDesc + '.'
 							});
 						})
+						.catch(error => {
+							bot.sendMessage({
+								to: channelID,
+								message: 'An error has occured. Poop.'
+							});
+						});
 					})
 					.catch(error => {
 						bot.sendMessage({
@@ -109,11 +142,48 @@ module.exports = (app, bot) => {
 						});
 					});
 					break;
+				//update img
+				case 'updateexgfximg':
+					// console.log("args[0]: " + args[0]);
+					// console.log("args[1]: " + args[1]);
+					var newDesc = args[1];
+					ExGFX
+					.find({
+						where: {
+							number: args[0]
+						}
+					})
+					.then(exgfx => {
+						// console.log(exgfx.description);
+						exgfx.update({
+							img_link: newDesc || exgfx.img_link
+						})
+						.then(() => {
+							bot.sendMessage({
+								to: channelID,
+								message: 'ExGFX' + args[0] + ' image link updated to ' + newDesc + '.'
+							});
+						})
+						.catch(error => {
+							bot.sendMessage({
+								to: channelID,
+								message: 'An error has occured. Poop.'
+							});
+						});
+					})
+					.catch(error => {
+						bot.sendMessage({
+							to: channelID,
+							message: 'An error has occured. Command format: !updateexgfxdesc <# in hex> <img_link>'
+						});
+					});
+					break;
 				//update exgfx finished status command
 				case 'updateexgfxstatus':
-					console.log("args[0]: " + args[0]);
-					console.log("args[1]: " + args[1]);
-					if(typeof(variable) == typeof(true)){
+					// console.log("args[0]: " + args[0]);
+					// console.log("args[1]: " + args[1]);
+					var bool = (args[1].toLowerCase() == 'true');
+					if(typeof(bool) == typeof(true)){
 						ExGFX
 						.find({
 							where: {
@@ -122,11 +192,11 @@ module.exports = (app, bot) => {
 						})
 						.then(exgfx => {
 							exgfx.update({
-								finished: arg[1]
-							}).then(exgfx => {
+								finished: bool || exgfx.finished
+							}).then(() => {
 								bot.sendMessage({
 									to: channelID,
-									message: 'ExGFX' + args[0] + ' finished status updated to ' + arg[1] + '.'
+									message: 'ExGFX' + args[0] + ' finished status updated to ' + bool + '.'
 								});
 							})
 						})    
@@ -145,12 +215,22 @@ module.exports = (app, bot) => {
 					break;
 				//list all exgfx command
 				case 'exgfx':
-					ExGFX.findAll().then(exgfxes => {
+					ExGFX
+					.findAll()
+					.then(exgfxes => {
+						exgfxes.forEach(exgfx => {
+							bot.sendMessage({
+								to: channelID,
+								message: 'ExGFX' + exgfx.number + '\nFinished: ' + exgfx.finished
+							});
+						})
+					})
+					.catch(error => {
 						bot.sendMessage({
 							to: channelID,
-							exgfxes
+							message: 'An error has occured. Command format: !exgfx'
 						});
-					})
+					});     
 					break;
 			}
 		}

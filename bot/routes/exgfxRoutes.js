@@ -1,5 +1,5 @@
 /**
- * Routes for ExGFX related queries. Users can seawrch for all files, 
+ * Routes for ExGFX related queries. Users can search for all files, 
  * specific files, or add/remove files as well.
  * @param {*} bot 
  */
@@ -16,9 +16,14 @@ module.exports = (bot) => {
                 case 'hewwo':
                     bot.sendMessage({
                         to: channelID,
-                        message: 'OwO _notices command_ hewwo'
+                        message: '_notices command_  OwO hewwo'
                     });
-                break;
+                    break;
+                case 'exgfx':
+                    bot.sendMessage({
+
+                    });
+                    break;
             }
         }
     });

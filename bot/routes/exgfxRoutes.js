@@ -1,17 +1,18 @@
-const ExGFX = require('../models').ExGFX;
-
 /**
  * Routes for ExGFX related queries. Users can search for all files, 
  * specific files, or add/remove files as well.
  * 
  * Commands:
  *  !exgfx: lists all  ExGFX files
- *  !addexgfx <# in hex> <description> <type>: adds a specific ExGFX file to database
- * 	!updateexgfxdesc <# in hex> <description>
- * 	!updateexgfxstatus <# in hex> <boolean>
- *  !getexgfx <# in hex>: gets a specific ExGFX file from database
+ *  !addexgfx  <# in hex>  <description>  <type>: adds a specific ExGFX file to database
+ * 	!updateexgfxdesc  <# in hex>  <description>
+ * 	!updateexgfxstatus  <# in hex>  <boolean>
+ *  !getexgfx  <# in hex>: gets a specific ExGFX file from database
  * @param bot 
  */
+
+const ExGFX = require('../models').ExGFX;
+
 module.exports = (bot) => {
 	bot.on('message', (user, userID, channelID, message, evt) => {
 		// Our bot needs to know if it will execute a command
@@ -144,10 +145,10 @@ module.exports = (bot) => {
 					break;
 				//list all exgfx command
 				case 'exgfx':
-					ExGFX.findAll().then(exgfxs => {
+					ExGFX.findAll().then(exgfxes => {
 						bot.sendMessage({
 							to: channelID,
-							exgfxs
+							exgfxes
 						});
 					})
 					break;

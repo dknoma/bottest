@@ -26,3 +26,9 @@ If need Sequelize:
 
 ```npm install -g sequelize-cli```
 
+If having trouble setting up online db:
+
+_Windows_
+
+```set DATABASE_URL=<dialect://url:port/dbname>```
+

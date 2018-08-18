@@ -22,3 +22,4 @@ bot.on('ready', evt => {
 
 require('./bot/routes/exgfxRoutes')(bot);
 
+module.exports = bot;

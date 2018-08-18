@@ -214,16 +214,20 @@ module.exports = (bot) => {
 					}
 					break;
 				//list all exgfx command
+				//todo: can make it so can output a sorted list
 				case 'exgfx':
 					ExGFX
 					.findAll()
 					.then(exgfxes => {
+						var msg = '';
 						exgfxes.forEach(exgfx => {
-							bot.sendMessage({
-								to: channelID,
-								message: 'ExGFX' + exgfx.number + '\nFinished: ' + exgfx.finished
-							});
+							console.log(exgfx);
+							msg += 'ExGFX' + exgfx.number + '\t\tFinished: ' + exgfx.finished + '\n';
 						})
+						bot.sendMessage({
+							to: channelID,
+							message: msg
+						});
 					})
 					.catch(error => {
 						bot.sendMessage({

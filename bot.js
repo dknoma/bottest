@@ -22,17 +22,24 @@ bot.on('ready', evt => {
 
 bot.on('message', (user, userID, channelID, message, evt) => {
     if(message.substring(0, 1) == '!')  {
+        // console.log(channelID);
         var args = message.substring(1).split('  ');
         var cmd = args[0];
 
         args = args.splice(1);
         switch(cmd) {
+            case 'hewwo':
+                bot.sendMessage({
+                    to: channelID,
+                    message: '_notices command_  OwO hewwo'
+                });
+                break;
             case 'commands':
             case 'help':
                 bot.sendMessage({
                     to: channelID,
                     message: '*+Note+ Don\'t forget to double space between arguments you want separated.*'
-                    +'\n!exgfx\n!getexgfx  <# in hex>\n!addexgfx  <# in hex>  <description>  <type>  <img_link>'
+                    +'\n!exgfx\n!getexgfx  <# in hex>\n!addexgfx  <# in hex>  <description>  <type>  <optional_img_link>'
                     +'\n!updateexgfxdesc  <# in hex>  <description>\n!updateexgfxstatus  <# in hex>  <boolean>'
                     +'\n!updateexgfximg  <# in hex>  <img_link>'
                 });

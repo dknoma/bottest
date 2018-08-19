@@ -15,68 +15,66 @@ module.exports = (bot) => {
 	bot.on('message', (user, userID, channelID, message, evt) => {
 		// Our bot needs to know if it will execute a command
 		// It will listen for messages that will start with `!`
-		if(message.substring(0, 1) == '!')  {
+		// *will only notice exgfx commands in #gfx
+		if(message.substring(0, 1) == '!' && channelID == 333510963540131840)  {
 			var args = message.substring(1).split('  ');
 			var cmd = args[0];
 
 			args = args.splice(1);
 			switch(cmd) {
-				//test case
-				case 'hewwo':
-					bot.sendMessage({
-						to: channelID,
-						message: '_notices command_  OwO hewwo'
-					});
-					break;
 				//add exgfx command
 				case 'addexgfx':
 					// console.log("args[0]: " + args[0]);
 					// console.log("args[1]: " + args[1]);
 					// console.log("args[2]: " + args[2]);
 					// console.log(parseInt(args[0], 16));
+					// console.log(typeof(channelID));
 
 					if(parseInt(args[0], 16)) {
 						ExGFX.findOrCreate({
 							where: {
-								number: args[0]
+								number: args[0].toUpperCase()
 							},
 							defaults: {
-								number: args[0],
+								number: args[0].toUpperCase(),
 								description: args[1],
 								biome_type: args[2],
-								img_link: args[3]
+								img_link: args[3] || 'No image link provided.'
 							}
 						})
 						.spread((exgfx, created) => {
 							//file was already created
 							if(!created) {
 								bot.sendMessage({
-									to: channelID,
-									message: 'ExGFX' + args[0] 
+									// to: channelID,
+									//#robug-log
+									to: '480520344034213902',
+									message: 'ExGFX' + args[0].toUpperCase()
 										+ ' has already been added to the database. Please try a different file.'
 								});
 							} else if(exgfx == null) {
 								bot.sendMessage({
-									to: channelID,
+									to: '480520344034213902',
 									message: 'ExGFX is null. Please try again.'
 								});
 							} else {
 								bot.sendMessage({
-									to: channelID,
-									message: 'ExGFX' + args[0] 
+									//#roblox
+									to: '480513949234757642',
+									message: 'ExGFX' + args[0].toUpperCase()
 										+ ' has successfully been added to the database!'
 								});
 							}
 						})
 						.catch(error => {
 							bot.sendMessage({
-								to: channelID,
+								to: '480520344034213902',
 								message: 'An error has occured. Command format: !addexgfx <# in hex> <description> <type>'
 							});
 						});
 					} else {
 						bot.sendMessage({
-							to: channelID,
+							to: '480520344034213902',
 							message: 'ExGFX number argument is invalid. The number must be in hexidecimal format.'
 						});
 					}
@@ -84,27 +82,31 @@ module.exports = (bot) => {
 				
 				//list a specific exgfx command
 				case 'getexgfx':
-					ExGFX
-					.find({
-						where: {
-							number: args[0]
-						}
-					})
-					.then(exgfx => {
-						bot.sendMessage({
-							to: channelID,
-							message: 'ExGFX' + exgfx.number + '\nFinished: ' + exgfx.finished 
-								+ '\nDescription: ' + exgfx.description
-								+ '\nBiome_type: ' + exgfx.biome_type
-								+ '\nImage_Link: ' + exgfx.img_link
+					var exgfxs = args[0].toUpperCase().split(',');
+					// console.log(exgfxs);
+					for(var i = 0; i < exgfxs.length; i++) {
+						ExGFX
+						.find({
+							where: {
+								number: exgfxs[i]
+							}
+						})
+						.then(exgfx => {
+							bot.sendMessage({
+								to: channelID,
+								message: 'ExGFX' + exgfx.number + '\nFinished: ' + exgfx.finished 
+									+ '\nDescription: ' + exgfx.description
+									+ '\nType: ' + exgfx.biome_type
+									+ '\nImage_Link: ' + exgfx.img_link + '\n'
+							});
+						})
+						.catch(error => {
+							bot.sendMessage({
+								to: '480520344034213902',
+								message: 'An error has occured. Command format: !getexgfx  <# in hex>'
+							});
 						});
-					})
-					.catch(error => {
-						bot.sendMessage({
-							to: channelID,
-							message: 'An error has occured. Command format: !exgfx'
-						});
-					});     
+					}
 					break;
 				//update exgfx description command
 				case 'updateexgfxdesc':
@@ -114,7 +116,7 @@ module.exports = (bot) => {
 					ExGFX
 					.find({
 						where: {
-							number: args[0]
+							number: args[0].toUpperCase()
 						}
 					})
 					.then(exgfx => {
@@ -124,20 +126,20 @@ module.exports = (bot) => {
 						})
 						.then(() => {
 							bot.sendMessage({
-								to: channelID,
-								message: 'ExGFX' + args[0] + ' description updated to ' + newDesc + '.'
+								to: '480513949234757642',
+								message: 'ExGFX' + args[0].toUpperCase() + ' description updated to ' + newDesc + '.'
 							});
 						})
 						.catch(error => {
 							bot.sendMessage({
-								to: channelID,
+								to: '480520344034213902',
 								message: 'An error has occured. Poop.'
 							});
 						});
 					})
 					.catch(error => {
 						bot.sendMessage({
-							to: channelID,
+							to: '480520344034213902',
 							message: 'An error has occured. Command format: !updateexgfxdesc <# in hex> <description>'
 						});
 					});
@@ -150,7 +152,7 @@ module.exports = (bot) => {
 					ExGFX
 					.find({
 						where: {
-							number: args[0]
+							number: args[0].toUpperCase()
 						}
 					})
 					.then(exgfx => {
@@ -160,20 +162,20 @@ module.exports = (bot) => {
 						})
 						.then(() => {
 							bot.sendMessage({
-								to: channelID,
-								message: 'ExGFX' + args[0] + ' image link updated to ' + newDesc + '.'
+								to: '480513949234757642',
+								message: 'ExGFX' + args[0].toUpperCase() + ' image link updated to ' + newDesc + '.'
 							});
 						})
 						.catch(error => {
 							bot.sendMessage({
-								to: channelID,
+								to: '480520344034213902',
 								message: 'An error has occured. Poop.'
 							});
 						});
 					})
 					.catch(error => {
 						bot.sendMessage({
-							to: channelID,
+							to: '480520344034213902',
 							message: 'An error has occured. Command format: !updateexgfxdesc <# in hex> <img_link>'
 						});
 					});
@@ -187,7 +189,7 @@ module.exports = (bot) => {
 						ExGFX
 						.find({
 							where: {
-								number: args[0]
+								number: args[0].toUpperCase()
 							}
 						})
 						.then(exgfx => {
@@ -195,20 +197,20 @@ module.exports = (bot) => {
 								finished: bool || exgfx.finished
 							}).then(() => {
 								bot.sendMessage({
-									to: channelID,
-									message: 'ExGFX' + args[0] + ' finished status updated to ' + bool + '.'
+									to: '480513949234757642',
+									message: 'ExGFX' + args[0].toUpperCase() + ' finished status updated to ' + bool + '.'
 								});
 							})
 						})    
 						.catch(error => {
 							bot.sendMessage({
-								to: channelID,
+								to: '480520344034213902',
 								message: 'An error has occured. Command format: !updateexgfxstatus <# in hex> <boolean>'
 							});
 						});              
 					} else {
 						bot.sendMessage({
-							to: channelID,
+							to: '480520344034213902',
 							message: 'Argument is not of type boolean. Please try again.'
 						});
 					}
@@ -221,7 +223,6 @@ module.exports = (bot) => {
 					.then(exgfxes => {
 						var msg = '';
 						exgfxes.forEach(exgfx => {
-							console.log(exgfx);
 							msg += 'ExGFX' + exgfx.number + '\t\tFinished: ' + exgfx.finished + '\n';
 						})
 						bot.sendMessage({
@@ -231,7 +232,7 @@ module.exports = (bot) => {
 					})
 					.catch(error => {
 						bot.sendMessage({
-							to: channelID,
+							to: '480520344034213902',
 							message: 'An error has occured. Command format: !exgfx'
 						});
 					});     

@@ -7,6 +7,14 @@
 ### .sequelizerc
 - The paths to files required by Sequelize.
 
+## Documentation
+
+### Sequelize Models
+
+To create models, cd to the root directory of the bot and use the following format:
+
+```sequelize model:create --name <Name> --attributes <parameter>:<data type>,<parameter>:<data type>,...```
+
 ## Installation
 ### All dependencies:
 ```js

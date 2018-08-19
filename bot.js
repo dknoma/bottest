@@ -49,5 +49,6 @@ bot.on('message', (user, userID, channelID, message, evt) => {
 });
 
 require('./bot/routes/exgfxRoutes')(bot);
+require('./bot/routes/levelRoutes')(bot);
 
 module.exports = bot;

@@ -10,9 +10,6 @@ module.exports = {
     number: {
       type: Sequelize.STRING
     },
-    name: {
-      type: Sequelize.STRING
-    },
     image_link: {
       type: Sequelize.STRING,
       defaultValue: 'No image link was provided.'

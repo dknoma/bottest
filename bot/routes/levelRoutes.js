@@ -27,18 +27,21 @@ module.exports = (bot) => {
                             msg += 'Level ' + level.number 
                                 + '\tName: ' + level.name
                                 + '\tRealm ' + level.realm_number;
-                            Sublevel
-                            .findAll({
-                                where: {
-                                    levelId: level.id
-                                }
+                            level.sublevels.forEach(sublevel => {
+                                msg += '    Sublevel ' + sublevel.number;
                             })
-                            .then(sublevels => {
-                                sublevels.forEach(sublevel => {
-                                    msg += '    Sublevel ' + sublevel.number 
-                                        + '\tName: ' + sublevel.name
-                                })
-                            })
+                            // Sublevel
+                            // .findAll({
+                            //     where: {
+                            //         levelId: level.id
+                            //     }
+                            // })
+                            // .then(sublevels => {
+                            //     sublevels.forEach(sublevel => {
+                            //         msg += '    Sublevel ' + sublevel.number 
+                            //             + '\tName: ' + sublevel.name
+                            //     })
+                            // })
                         });
                         
                         bot.sendMessage({
@@ -50,8 +53,14 @@ module.exports = (bot) => {
                         bot.sendMessage({
                             to: channelID,
                             message: 'Testing !level catch block.'
-                        })
+                        });
                     })
+                    break;
+                case 'addlevel': 
+                    bot.sendMessage({
+                        to: channelID,
+                        message: 'Testing !addlevel.'
+                    });
                     break;
             }
         }

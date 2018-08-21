@@ -39,7 +39,7 @@ module.exports = (bot) => {
 								number: args[0].toUpperCase(),
 								description: args[1],
 								biome_type: args[2],
-								img_link: args[3] || 'No image link provided.'
+								img_link: args[3]
 							}
 						})
 						.spread((exgfx, created) => {
@@ -220,9 +220,9 @@ module.exports = (bot) => {
 				case 'exgfx':
 					ExGFX
 					.findAll()
-					.then(exgfxes => {
+					.then(async exgfxes => {
 						var msg = '';
-						exgfxes.forEach(exgfx => {
+						await exgfxes.forEach(exgfx => {
 							msg += 'ExGFX' + exgfx.number + '\t\tFinished: ' + exgfx.finished + '\n';
 						})
 						bot.sendMessage({

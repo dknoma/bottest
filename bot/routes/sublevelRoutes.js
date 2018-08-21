@@ -133,6 +133,38 @@ module.exports = (bot) => {
                     }
                     break;
 
+                case 'updatesubimg':
+					if(parseInt(args[0], 16)) {
+						Sublevel.find({
+							where: {
+								number: args[0].toUpperCase()
+							}
+						})
+						.then(sublevel => {
+							sublevel
+							.update({
+								image_link: args[1]
+							}).then(() => {
+								bot.sendMessage({
+									to: '480513949234757642',
+									message: 'Sublevel ' + args[0].toUpperCase() + ' image updated to ' + args[1] + '.'
+								});
+							})
+						})
+						.catch(error => {
+							bot.sendMessage({
+								to: '480520344034213902',
+								message: 'An error has occured. Command format: !updatesubimg <# in hex>  <img link>'
+							});
+						});
+					} else {
+						bot.sendMessage({
+							to: '480520344034213902',
+							message: 'Sublevel number argument is invalid. The number must be in hexidecimal format.'
+						});
+					}
+					break;
+				
                 case 'deletesub':
                     if(parseInt(args[0], 16)) {
                         Sublevel.find({

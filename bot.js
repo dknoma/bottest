@@ -48,15 +48,24 @@ bot.on('message', (user, userID, channelID, message, evt) => {
                 break;
             case 'commands':
             case 'help':
+                var msg = '*+Note+ Don\'t forget to double space between arguments you want separated.*';
+                //if in #gfx, will show gfx related commands
+                if(channelID == 333510963540131840) {
+                    msg += '\nExGFX Commands:'
+                    +'\n └─ !exgfx\n └─ !getexgfx  <# in hex>\n └─ !addexgfx  <# in hex>  <description>  <type>  <optional_image_link>'
+                    +'\n └─ !updateexgfxdesc  <# in hex>  <description>\n └─ !updateexgfxstatus  <# in hex>  <boolean>'
+                    +'\n └─ !updateexgfximg  <# in hex>  <image_link>';
+                }
+                msg += '\nLevel Commands:'
+                +'\n └─ !addlevel <# in hex> <name> <realm_number>  <image_link>\n └─ !updatelevelimg  <# in hex>  <image_link>'
+                +'\n └─ !getlevel <# in hex>  {optional \'all\' if want sublevels}\n └─ !deletelevel  <# in hex>\n └─ !levels'
+                +'\nSublevel Commands:'
+                +'\n └─ !addsublevel  <# in hex>  <main level #>  <image_link>\n └─ !updatesubimg <# in hex>  <image_link>'
+                +'\n └─ !getsub  <# in hex>\n └─ !deletesub  <# in hex>\n └─ !sublevels';
+
                 bot.sendMessage({
                     to: channelID,
-                    message: '*+Note+ Don\'t forget to double space between arguments you want separated.*'
-                    +'\n!exgfx\n!getexgfx  <# in hex>\n!addexgfx  <# in hex>  <description>  <type>  <optional_img_link>'
-                    +'\n!updateexgfxdesc  <# in hex>  <description>\n!updateexgfxstatus  <# in hex>  <boolean>'
-                    +'\n!updateexgfximg  <# in hex>  <img_link>\n!levels\n!deletelevel  <# in hex>\n!getlevel <# in hex>  {optional \'all\' if want sublevels}'
-                    +'\n!addlevel <# in hex> <name> <realm_number>  <image_link>\n!updatelevelimg <# in hex>  <img link>'
-                    +'\n!sublevels\n!getsub  <# in hex>\n!deletesub  <# in hex>'
-                    +'\n!addsublevel  <# in hex>  <main level #>  <image_link>'
+                    message: msg
                 });
                 break;
         }

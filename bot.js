@@ -53,7 +53,7 @@ bot.on('message', (user, userID, channelID, message, evt) => {
                     message: '*+Note+ Don\'t forget to double space between arguments you want separated.*'
                     +'\n!exgfx\n!getexgfx  <# in hex>\n!addexgfx  <# in hex>  <description>  <type>  <optional_img_link>'
                     +'\n!updateexgfxdesc  <# in hex>  <description>\n!updateexgfxstatus  <# in hex>  <boolean>'
-                    +'\n!updateexgfximg  <# in hex>  <img_link>\n!levels\n!getlevel  <# in hex>\n!deletelevel  <# in hex>'
+                    +'\n!updateexgfximg  <# in hex>  <img_link>\n!levels\n!deletelevel  <# in hex>\n!getlevel <# in hex>  {optional \'all\' if want sublevels}'
                     +'\n!addlevel <# in hex> <name> <realm_number>  <image_link>\n!sublevels\n!getsub  <# in hex>\n!deletesub  <# in hex>'
                     +'\n!addsublevel  <# in hex>  <main level #>  <image_link>'
                 });

@@ -1,7 +1,7 @@
 /**
  * !levels
  * !addlevel <# in hex> <name> <realm_number>  <image_link>
- * !getlevel <# in hex>
+ * !getlevel <# in hex>  {optional \'all\' if want sublevels}
  * !deletelevel <# in hex>
  * 
  * #robug-log:   '480520344034213902'

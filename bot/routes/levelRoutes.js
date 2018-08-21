@@ -65,7 +65,7 @@ module.exports = (bot) => {
 							}]
 						})
 						.then(level => {
-							var msg = 'Level ' + level.number + '\t' + level.name + '\nRealm ' + level.realm_number
+							var msg = 'Level ' + level.number + '\t' + level.name + '\tRealm ' + level.realm_number
 							
 							if(args[1] != null && args[1] == 'all') {
 								level.sublevels.forEach(sublevel => {
@@ -104,7 +104,7 @@ module.exports = (bot) => {
 								number: args[0].toUpperCase(),
 								name: args[1],
 								realm_number: args[2],
-								img_link: args[3]
+								image_link: args[3]
 							}
 						})
 						.spread((level, created) => {

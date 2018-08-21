@@ -17,18 +17,19 @@ module.exports = (bot) => {
                     Level
                     .findAll({
                         include: [{
-                            model: 'Sublevel',
+                            model: Sublevel,
                             as: 'sublevels'
                         }]
                     })
-                    .then(levels => {
+                    .then(async levels => {
 						var msg = '';
-                        levels.forEach(level => {
-                            msg += 'Level ' + level.number 
-                                + '\tName: ' + level.name
+                        levels.forEach(async level => {
+                            console.log(level.number);
+                            msg += '\nLevel ' + level.number 
+                                + '\t' + level.name
                                 + '\tRealm ' + level.realm_number;
-                            level.sublevels.forEach(sublevel => {
-                                msg += '    Sublevel ' + sublevel.number;
+                            await level.sublevels.forEach(sublevel => {
+                                msg += '\n   └─ Sublevel ' + sublevel.number;
                             })
                             // Sublevel
                             // .findAll({
@@ -38,29 +39,104 @@ module.exports = (bot) => {
                             // })
                             // .then(sublevels => {
                             //     sublevels.forEach(sublevel => {
-                            //         msg += '    Sublevel ' + sublevel.number 
-                            //             + '\tName: ' + sublevel.name
+                            //         msg += '└─ Sublevel ' + sublevel.number
                             //     })
                             // })
                         });
                         
                         bot.sendMessage({
                             to: channelID,
-                            message: 'Testing !level' + msg
+                            message: msg
                         })
                     })
                     .catch(error => {
                         bot.sendMessage({
-                            to: channelID,
-                            message: 'Testing !level catch block.'
+                            to: '480520344034213902',
+                            message: 'An error has occured. Command format: !levels'
                         });
                     })
                     break;
                 case 'addlevel': 
-                    bot.sendMessage({
-                        to: channelID,
-                        message: 'Testing !addlevel.'
-                    });
+                    if(parseInt(args[0], 16)) {
+                        console.log(args[0] + args[1] + args[2] + args[3]);
+                        Level.findOrCreate({
+                            where: {
+                                number: args[0].toUpperCase()
+                            },
+                            defaults: {
+                                number: args[0].toUpperCase(),
+                                name: args[1],
+                                realm_number: args[2],
+                                img_link: args[3]
+                            }
+                        })
+                        .spread((level, created) => {
+                            //file was already created
+                            if(!created) {
+                                bot.sendMessage({
+                                    // to: channelID,
+                                    //#robug-log
+                                    to: '480520344034213902',
+                                    message: 'Level' + args[0].toUpperCase()
+                                        + ' has already been added to the database. Please try a different level.'
+                                });
+                            } else if(level == null) {
+                                bot.sendMessage({
+                                    to: '480520344034213902',
+                                    message: 'Level is null. Please try again.'
+                                });
+                            } else {
+                                bot.sendMessage({
+                                    //#roblox
+                                    to: '480513949234757642',
+                                    message: 'Level' + args[0].toUpperCase()
+                                        + ' has successfully been added to the database!'
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            bot.sendMessage({
+                                to: '480520344034213902',
+                                message: 'An error has occured. Command format: !addlevel <# in hex> <name> <realm_number>  <image_link>'
+                            });
+                        });
+                    } else {
+                        bot.sendMessage({
+                            to: '480520344034213902',
+                            message: 'Level number argument is invalid. The number must be in hexidecimal format.'
+                        });
+                    }
+                    break;
+                
+                case 'deletelevel':
+                    if(parseInt(args[0], 16)) {
+                        Level.find({
+                            where: {
+                                number: args[0].toUpperCase()
+                            }
+                        })
+                        .then(level => {
+                            level
+                            .destroy()
+                            .then(() => {
+                                bot.sendMessage({
+                                    to: '480513949234757642',
+                                    message: 'Level successfully deleted!'
+                                });
+                            })
+                        })
+                        .catch(error => {
+                            bot.sendMessage({
+                                to: '480520344034213902',
+                                message: 'An error has occured. Command format: !deletelevel <# in hex>'
+                            });
+                        });
+                    } else {
+                        bot.sendMessage({
+                            to: '480520344034213902',
+                            message: 'Level number argument is invalid. The number must be in hexidecimal format.'
+                        });
+                    }
                     break;
             }
         }

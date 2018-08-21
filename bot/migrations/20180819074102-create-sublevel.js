@@ -8,7 +8,12 @@ module.exports = {
       type: Sequelize.INTEGER
     },
     number: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    main_level: {
+      type: Sequelize.STRING,
+      allowNull: false
     },
     image_link: {
       type: Sequelize.STRING,
@@ -16,6 +21,7 @@ module.exports = {
     },
     levelId: {
       type: Sequelize.INTEGER,
+      allowNull: false,
       onDelete: 'CASCADE',
       references: {
         model: 'Levels',

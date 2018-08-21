@@ -52,9 +52,10 @@ bot.on('message', (user, userID, channelID, message, evt) => {
                 //if in #gfx, will show gfx related commands
                 if(channelID == 333510963540131840) {
                     msg += '\nExGFX Commands:'
-                    +'\n └─ !exgfx\n └─ !getexgfx  <# in hex>\n └─ !addexgfx  <# in hex>  <description>  <type>  <optional_image_link>'
-                    +'\n └─ !updateexgfxdesc  <# in hex>  <description>\n └─ !updateexgfxstatus  <# in hex>  <boolean>'
-                    +'\n └─ !updateexgfximg  <# in hex>  <image_link>';
+                    +'\n └─ !addexgfx  <# in hex>  <description>  <type>  <optional_image_link>'
+                    +'\n └─ !updateexgfxdesc  <# in hex>  <description>'
+                    +'\n └─ !updateexgfxstatus  <# in hex>  <boolean>\n └─ !updateexgfximg  <# in hex>  <image_link>'
+                    +'\n └─ !getexgfx  <# in hex>\n └─ !exgfx';
                 }
                 msg += '\nLevel Commands:'
                 +'\n └─ !addlevel <# in hex> <name> <realm_number>  <image_link>\n └─ !updatelevelimg  <# in hex>  <image_link>'

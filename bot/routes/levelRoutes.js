@@ -58,13 +58,17 @@ module.exports = (bot) => {
 						Level.find({
 							where: {
 								number: args[0].toUpperCase()
-							}
+							},
+							include: [{
+								model: Sublevel,
+								as: 'sublevels'
+							}]
 						})
-						.then(async level => {
+						.then(level => {
 							var msg = 'Level ' + level.number + '\t' + level.name + '\nRealm ' + level.realm_number
 							
 							if(args[1] != null && args[1] == 'all') {
-								await level.sublevels.forEach(sublevel => {
+								level.sublevels.forEach(sublevel => {
 									msg += '\n   └─ Sublevel ' + sublevel.number;
 								});
 							}

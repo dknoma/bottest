@@ -37,9 +37,37 @@ module.exports = (bot) => {
                         });
                     })
                     break;
+                
+                case 'getsub':
+                    if(parseInt(args[0], 16)) {
+                        Sublevel.find({
+                            where: {
+                                number: args[0].toUpperCase()
+                            }
+                        })
+                        .then(sublevel => {
+                            bot.sendMessage({
+                                to: channelID,
+                                message: 'Sublevel ' + sublevel.number + '\nMain level: ' + sublevel.main_level + '\t' + sublevel.image_link
+                            });
+                        })
+                        .catch(error => {
+                            bot.sendMessage({
+                                to: '480520344034213902',
+                                message: 'An error has occured. Command format: !getsub <# in hex>'
+                            });
+                        });
+                    } else {
+                        bot.sendMessage({
+                            to: '480520344034213902',
+                            message: 'Sublevel number argument is invalid. The number must be in hexidecimal format.'
+                        });
+                    }
+                    break;
 
                 case 'addsublevel': 
-                    if(parseInt(args[0], 16)) {
+                    //check if both the first two arguments are in hexidecimal format
+                    if(parseInt(args[0], 16) && parseInt(args[1], 16)) {
                         console.log('main level: ' + args[1].toUpperCase());
                         Level.find({
                             where: {

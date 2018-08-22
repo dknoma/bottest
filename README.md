@@ -1,5 +1,5 @@
 # EMW Discord Bot
-> This is a Discord bot used in a personal server to hel
+> This is a Discord bot used in a personal server to help organize workflow and make finding files more efficient.
 
 
 ## Various Files

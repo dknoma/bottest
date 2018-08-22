@@ -73,6 +73,7 @@ bot.on('message', (user, userID, channelID, message, evt) => {
     }
 });
 
+require('./bot/routes/emoteRoutes')(bot);
 require('./bot/routes/exgfxRoutes')(bot);
 require('./bot/routes/levelRoutes')(bot);
 require('./bot/routes/sublevelRoutes')(bot);

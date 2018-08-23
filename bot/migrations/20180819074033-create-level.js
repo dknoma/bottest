@@ -15,6 +15,10 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false
     },
+    description: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
     realm_number: {
       type: Sequelize.INTEGER,
       allowNull: false

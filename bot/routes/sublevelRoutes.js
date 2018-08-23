@@ -48,7 +48,8 @@ module.exports = (bot) => {
                         .then(sublevel => {
                             bot.sendMessage({
                                 to: channelID,
-                                message: 'Sublevel ' + sublevel.number + '\nMain level: ' + sublevel.main_level + '\t' + sublevel.image_link
+                                message: 'Sublevel ' + sublevel.number + '\nMain level: ' + sublevel.main_level 
+                                        + '\nDescription: ' + sublevel.description + '\t' + sublevel.image_link
                             });
                         })
                         .catch(error => {
@@ -83,7 +84,8 @@ module.exports = (bot) => {
                                 defaults: {
                                     number: args[0].toUpperCase(),
                                     main_level: level.number,
-                                    image_link: args[2],
+                                    description: args[2],
+                                    image_link: args[3],
                                     levelId: level.id
                                 }
                             })
@@ -115,13 +117,13 @@ module.exports = (bot) => {
                             .catch(error => {
                                 bot.sendMessage({
                                     to: '480520344034213902',
-                                    message: 'An error has occured. Command format: !addsublevel  <# in hex>  <main level>  <image_link>'
+                                    message: 'An error has occured. Command format: !addsublevel  <# in hex>  <main level>  <description>  <image_link>'
                                 });
                             });
                         }).catch(error => {
                             bot.sendMessage({
                                 to: '480520344034213902',
-                                message: 'An error has occured. Command format: !addsublevel  <# in hex>  <main level>  <image_link>'
+                                message: 'An error has occured. Command format: !addsublevel  <# in hex>  <main level>  <description>  <image_link>'
                             });
                         });
                             

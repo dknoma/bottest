@@ -31,7 +31,7 @@ module.exports = (bot) => {
 					.then(async levels => {
 						var msg = '';
 						levels.forEach(async level => {
-							console.log(level.number);
+							// console.log(level.number);
 							msg += '\nLevel ' + level.number 
 								+ '\t' + level.name
 								+ '\tRealm ' + level.realm_number;
@@ -73,7 +73,7 @@ module.exports = (bot) => {
 								});
 							}
 
-							msg	+= '\n' + level.image_link
+							msg	+= '\nDescription: ' + level.description +'\n' + level.image_link
 							bot.sendMessage({
 								to: channelID,
 								message: msg
@@ -95,7 +95,7 @@ module.exports = (bot) => {
 
 				case 'addlevel': 
 					if(parseInt(args[0], 16)) {
-						console.log(args[0] + args[1] + args[2] + args[3]);
+						// console.log(args[0] + args[1] + args[2] + args[3]);
 						Level.findOrCreate({
 							where: {
 								number: args[0].toUpperCase()
@@ -103,8 +103,9 @@ module.exports = (bot) => {
 							defaults: {
 								number: args[0].toUpperCase(),
 								name: args[1],
-								realm_number: args[2],
-								image_link: args[3]
+								description: args[2],
+								realm_number: args[3],
+								image_link: args[4]
 							}
 						})
 						.spread((level, created) => {
@@ -134,7 +135,7 @@ module.exports = (bot) => {
 						.catch(error => {
 							bot.sendMessage({
 								to: '480520344034213902',
-								message: 'An error has occured. Command format: !addlevel <# in hex> <name> <realm_number>  <image_link>'
+								message: 'An error has occured. Command format: !addlevel <# in hex> <name>  <description>  <realm_number>  <image_link>'
 							});
 						});
 					} else {

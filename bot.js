@@ -8,7 +8,8 @@
  * pg_dump -O -s -x bot-dev | egrep -v "(^SET|^/\*\!)" > mypostgres.sql
  * 
  * Windows
- * pg_dump -O -s -x bot-dev | findstr -v "(^SET|^/\*\!)" > mypostgres.sql
+ * pg_dump -O -x bot-dev | findstr -v "(^SET|^/\*\!)" > mypostgres.sql
+ * psql <dbname> < <dump.sql>
  */
 const Discord = require('discord.io');
 const logger = require('winston');
@@ -58,7 +59,7 @@ bot.on('message', (user, userID, channelID, message, evt) => {
                     +'\n └─ !getexgfx  <# in hex>\n └─ !exgfx';
                 }
                 msg += '\nLevel Commands:'
-                +'\n └─ !addlevel <# in hex> <name> <realm_number>  <image_link>\n └─ !updatelevelimg  <# in hex>  <image_link>'
+                +'\n └─ !addlevel <# in hex> <name>  <description>  <realm_number>  <image_link>\n └─ !updatelevelimg  <# in hex>  <image_link>'
                 +'\n └─ !getlevel <# in hex>  {optional \'all\' if want sublevels}\n └─ !deletelevel  <# in hex>\n └─ !levels'
                 +'\nSublevel Commands:'
                 +'\n └─ !addsublevel  <# in hex>  <main level #>  <image_link>\n └─ !updatesubimg <# in hex>  <image_link>'

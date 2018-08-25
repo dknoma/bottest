@@ -49,7 +49,7 @@ module.exports = (bot) => {
                             bot.sendMessage({
                                 to: channelID,
                                 message: 'Sublevel ' + sublevel.number + '\nMain level: ' + sublevel.main_level 
-                                        + '\nDescription: ' + sublevel.description + '\t' + sublevel.image_link
+                                        + '\nDescription: ' + sublevel.description + '\n' + sublevel.image_link
                             });
                         })
                         .catch(error => {

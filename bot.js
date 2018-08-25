@@ -35,13 +35,13 @@ bot.on('ready', evt => {
 
 bot.on('message', (user, userID, channelID, message, evt) => {
     if(message.substring(0, 1) == '!')  {
-        // console.log(channelID);
         var args = message.substring(1).split('  ');
         var cmd = args[0];
 
         args = args.splice(1);
         switch(cmd) {
             case 'hewwo':
+                console.log(channelID);
                 bot.sendMessage({
                     to: channelID,
                     message: '_notices command_  OwO hewwo'
@@ -50,20 +50,23 @@ bot.on('message', (user, userID, channelID, message, evt) => {
             case 'commands':
             case 'help':
                 var msg = '*+Note+ Don\'t forget to double space between arguments you want separated.*';
+                msg += '\n!hewwo\n!help\n!commands'
                 //if in #gfx, will show gfx related commands
-                if(channelID == 333510963540131840) {
+                // if(channelID == 333510963540131840) {
                     msg += '\nExGFX Commands:'
                     +'\n └─ !addexgfx  <# in hex>  <description>  <type>  <optional_image_link>'
                     +'\n └─ !updateexgfxdesc  <# in hex>  <description>'
                     +'\n └─ !updateexgfxstatus  <# in hex>  <boolean>\n └─ !updateexgfximg  <# in hex>  <image_link>'
                     +'\n └─ !getexgfx  <# in hex>\n └─ !exgfx';
-                }
-                msg += '\nLevel Commands:'
-                +'\n └─ !addlevel <# in hex> <name>  <description>  <realm_number>  <image_link>\n └─ !updatelevelimg  <# in hex>  <image_link>'
-                +'\n └─ !getlevel <# in hex>  {optional \'all\' if want sublevels}\n └─ !deletelevel  <# in hex>\n └─ !levels'
-                +'\nSublevel Commands:'
-                +'\n └─ !addsublevel  <# in hex>  <main level #>  <image_link>\n └─ !updatesubimg <# in hex>  <image_link>'
-                +'\n └─ !getsub  <# in hex>\n └─ !deletesub  <# in hex>\n └─ !sublevels';
+                // }
+                // if(channelID == 482303529101426689) {
+                    msg += '\nLevel Commands:'
+                    +'\n └─ !addlevel <# in hex> <name>  <description>  <realm_number>  <image_link>\n └─ !updatelevelimg  <# in hex>  <image_link>'
+                    +'\n └─ !getlevel <# in hex>  {optional \'all\' if want sublevels}\n └─ !deletelevel  <# in hex>\n └─ !levels'
+                    +'\nSublevel Commands:'
+                    +'\n └─ !addsublevel  <# in hex>  <main level #>  <image_link>\n └─ !updatesubimg <# in hex>  <image_link>'
+                    +'\n └─ !getsub  <# in hex>\n └─ !deletesub  <# in hex>\n └─ !sublevels';
+                // }
 
                 bot.sendMessage({
                     to: channelID,

@@ -16,7 +16,7 @@ module.exports = (bot) => {
 		// Our bot needs to know if it will execute a command
 		// It will listen for messages that will start with `!`
 		// *will only notice exgfx commands in #gfx
-		if(message.substring(0, 1) == '!' && channelID == 333510963540131840)  {
+		if(message.substring(0, 1) == '!' && (channelID == 333510963540131840 || channelID == 482305461455028225))  {
 			var args = message.substring(1).split('  ');
 			var cmd = args[0];
 

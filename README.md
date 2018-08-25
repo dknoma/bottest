@@ -1,6 +1,9 @@
 # EMW Discord Bot
 > This is a Discord bot used in a personal server to help organize workflow and make finding files more efficient.
 
+You found me!
+
+Welcome! This code right here is the code for a Discord bot that I am testing out. This bot is meant to allow my friends and I to figure out what kinds of ExGFX files, Levels, and Sublevels are taken, which ones need to be updated,
 
 ## Various Files
 

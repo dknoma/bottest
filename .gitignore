@@ -1,5 +1,6 @@
 ###################
-./config/config.json
+./bot/config/config.json
+/bot/config/config.json
 auth.json
 *.env
 *.sql

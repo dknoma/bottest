@@ -3,9 +3,21 @@
 
 You found me!
 
-Welcome! This code right here is the code for a Discord bot that I am testing out. This bot is meant to allow my friends and I to figure out what kinds of ExGFX files, Levels, and Sublevels are taken, which ones need to be updated,
+Welcome! This code right here is the code for a Discord bot that I am testing out. This bot is meant to allow my friends and I to figure out what kinds of ExGFX files, Levels, and Sublevels are taken, which ones need to be updated, or even figure out what kinds of things need to be done. This Discord bot is meant to interact with some sort of database ie. PostreSQL, Amazon RDS, ElephantSQL, etc. This bot is also coded using Javascript and specifically Node.js.
 
-## Various Files
+## Various Folders and Files
+
+### Models
+- This folder contains the models of the data to be stored in the database. This will determine what kind of data can be added or viewed.
+
+### Routes
+- This folder contains the various routes that determine what commands users need to input to actually use the bot. Each kind of model should have their own routes. This is good practice.
+
+### Migrations
+- This folder will determine how each model will actually be created, what kind of relations to other models they have, and the time at which the model was created or updated.
+
+### node_modules
+- This folder contains various 
 
 ### .sequelizerc
 - The paths to files required by Sequelize.

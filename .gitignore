@@ -1,6 +1,10 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 ###################
 ./bot/config/config.json
 /bot/config/config.json
 auth.json
 *.env
 *.sql
+
+# dependencies
+/node_modules

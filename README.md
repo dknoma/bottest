@@ -16,9 +16,6 @@ Welcome! This code right here is the code for a Discord bot that I am testing ou
 ### Migrations
 - This folder will determine how each model will actually be created, what kind of relations to other models they have, and the time at which the model was created or updated.
 
-### node_modules
-- This folder contains various 
-
 ### .sequelizerc
 - The paths to files required by Sequelize.
 
